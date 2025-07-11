@@ -65,7 +65,7 @@ public class PlayArea {
             update();
 
             try {
-                Thread.sleep(16);
+                Thread.sleep(8);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
