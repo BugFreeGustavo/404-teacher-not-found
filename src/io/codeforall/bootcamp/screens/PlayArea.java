@@ -5,11 +5,12 @@ import com.codeforall.simplegraphics.graphics.Rectangle;
 import com.codeforall.simplegraphics.graphics.Text;
 import com.codeforall.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.bullets.Bullet;
+import io.codeforall.bootcamp.effects.ScreenShaker;
+import io.codeforall.bootcamp.factories.ShootableFactory;
 import io.codeforall.bootcamp.players.Gustavo;
 import io.codeforall.bootcamp.players.Player;
 import io.codeforall.bootcamp.shootable.Shootable;
-import io.codeforall.bootcamp.shootable.enemy.Rolo;
-import io.codeforall.bootcamp.shootable.friendly.Afonso;
+import io.codeforall.bootcamp.shootable.ShootableType;
 import io.codeforall.bootcamp.utils.CollisionChecker;
 import io.codeforall.bootcamp.utils.MyKeyboardHandler;
 import io.codeforall.bootcamp.utils.PopupText;
@@ -65,13 +66,9 @@ public class PlayArea {
         gustavo.init();
         System.out.println("LOADING GUSTAVO");
 
-        addTarget(new Rolo());
-        System.out.println("LOADING ROLO 1");
+        addTarget(ShootableFactory.getWeightedRandomShootable());
+        System.out.println("LOADING " + targets.getFirst().getType().toString());
 
-        if (targets.getFirst() == null) {
-            addTarget(new Afonso());
-            System.out.println("LOADING AFONSO 1");
-        }
 
         new Thread(this::gameLoop).start();
     }
@@ -102,6 +99,10 @@ public class PlayArea {
                 if (!b.isCollided() && CollisionChecker.isColliding(b, target)) {
                     b.setCollided();
                     target.onHit();
+
+//                    if(target.getType().getCategory() == ShootableType.Category.ENEMY) {
+//                       ScreenShaker.startShake(6, 5);
+//                    }
                 }
             }
 
@@ -136,7 +137,7 @@ public class PlayArea {
         if (spawnNextTarget) {
             spawnNextTarget = false;
 
-            addTarget(new Rolo());
+            addTarget(ShootableFactory.getWeightedRandomShootable());
         }
     }
 

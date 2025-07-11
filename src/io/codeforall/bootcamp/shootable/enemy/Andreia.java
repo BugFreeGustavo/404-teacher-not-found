@@ -3,6 +3,7 @@ package io.codeforall.bootcamp.shootable.enemy;
 import com.codeforall.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
+import io.codeforall.bootcamp.shootable.ShootableType;
 import io.codeforall.bootcamp.utils.PopupText;
 
 public class Andreia implements Shootable {
@@ -95,6 +96,11 @@ public class Andreia implements Shootable {
     @Override
     public int getHeight() {
         return andreia.getHeight();
+    }
+
+    @Override
+    public ShootableType getType() {
+        return ShootableType.ANDREIA;
     }
 }
 

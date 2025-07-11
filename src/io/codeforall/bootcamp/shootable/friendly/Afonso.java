@@ -3,6 +3,7 @@ package io.codeforall.bootcamp.shootable.friendly;
 import com.codeforall.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
+import io.codeforall.bootcamp.shootable.ShootableType;
 import io.codeforall.bootcamp.utils.PopupText;
 
 public class Afonso implements Shootable {
@@ -92,5 +93,10 @@ public class Afonso implements Shootable {
     @Override
     public int getHeight() {
         return afonso.getHeight();
+    }
+
+    @Override
+    public ShootableType getType() {
+        return ShootableType.AFONSO;
     }
 }

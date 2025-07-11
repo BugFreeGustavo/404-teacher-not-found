@@ -3,6 +3,7 @@ package io.codeforall.bootcamp.shootable.bonus;
 import com.codeforall.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
+import io.codeforall.bootcamp.shootable.ShootableType;
 import io.codeforall.bootcamp.utils.PopupText;
 
 public class Elias implements Shootable {
@@ -92,5 +93,10 @@ public class Elias implements Shootable {
     @Override
     public int getHeight() {
         return elias.getHeight();
+    }
+
+    @Override
+    public ShootableType getType() {
+        return ShootableType.ELIAS;
     }
 }

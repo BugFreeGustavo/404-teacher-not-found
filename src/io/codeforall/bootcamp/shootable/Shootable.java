@@ -14,5 +14,7 @@ public interface Shootable {
     int getWidth();
     int getHeight();
 
+    ShootableType getType();
+
 
 }

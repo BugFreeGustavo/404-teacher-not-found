@@ -3,6 +3,7 @@ package io.codeforall.bootcamp.shootable.enemy;
 import com.codeforall.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
+import io.codeforall.bootcamp.shootable.ShootableType;
 import io.codeforall.bootcamp.utils.PopupText;
 
 public class Carolina implements Shootable {
@@ -95,5 +96,10 @@ public class Carolina implements Shootable {
     @Override
     public int getHeight() {
         return carolina.getHeight();
+    }
+
+    @Override
+    public ShootableType getType() {
+        return ShootableType.CAROLINA;
     }
 }
