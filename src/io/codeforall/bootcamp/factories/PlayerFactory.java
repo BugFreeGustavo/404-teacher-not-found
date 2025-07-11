@@ -8,6 +8,8 @@ public class PlayerFactory {
 
     public static Player getPlayer(PlayerType players) {
         return switch (players) {
+            case DANIEL -> null;
+            case MARIA -> null;
             case GUSTAVO -> new Gustavo(20, 650);
         };
     }

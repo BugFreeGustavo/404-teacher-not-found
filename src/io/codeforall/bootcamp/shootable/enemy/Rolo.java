@@ -1,7 +1,9 @@
 package io.codeforall.bootcamp.shootable.enemy;
 
 import com.codeforall.simplegraphics.pictures.Picture;
+import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
+import io.codeforall.bootcamp.utils.PopupText;
 
 public class Rolo implements Shootable {
 
@@ -46,6 +48,9 @@ public class Rolo implements Shootable {
             rolo.draw();
 
             System.out.println("ROLO WAS HIT!");
+
+            PlayArea.getInstance().addScore(100);
+            PlayArea.addPopup(new PopupText(getX() + 300 , getY() + 180, "+100"));
         }
     }
 
