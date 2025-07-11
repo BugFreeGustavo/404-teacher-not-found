@@ -1,34 +1,34 @@
-package io.codeforall.bootcamp.shootable.friendly;
+package io.codeforall.bootcamp.shootable.bonus;
 
 import com.codeforall.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
 import io.codeforall.bootcamp.utils.PopupText;
 
-public class Afonso implements Shootable {
+public class Elias implements Shootable {
 
-    private final Picture afonso;
+    private final Picture elias;
 
     private boolean hit = false;
     private boolean isDone = false;
     private int hitTimer = 0;
 
-    public Afonso() {
+    public Elias() {
         int[] yPositions = {10, 330, 650};
 
         int randomY = yPositions[(int) (Math.random() * yPositions.length)];
 
-        afonso = new Picture(1000, randomY, "resources/Friendlies/Afonso/afonso-alive.png");
+        elias = new Picture(1000, randomY, "resources/BonusChar/Elias/elias-down.png");
     }
 
     @Override
     public void init() {
-        afonso.draw();
+        elias.draw();
     }
 
     @Override
     public void delete() {
-        afonso.delete();
+        elias.delete();
     }
 
     @Override
@@ -38,14 +38,14 @@ public class Afonso implements Shootable {
             hit = true;
             hitTimer = 180;
 
-            afonso.load("resources/Friendlies/Afonso/afonso-dead.png");
-            afonso.draw();
+            elias.load("resources/Friendlies/Afonso/afonso-dead.png");
+            elias.draw();
 
-            System.out.println("AFONSO WAS HIT!");
+            System.out.println("ELIAS WAS HIT!");
 
-            PlayArea.getInstance().addScore(-50);
+            PlayArea.getInstance().addScore(-9999);
 
-            PopupText redPopup = new PopupText(getX() + 300, getY() + 180, "-50");
+            PopupText redPopup = new PopupText(getX() + 300, getY() + 180, "-9999");
             redPopup.setColorRed();
             PlayArea.addPopup(redPopup);
         }
@@ -76,21 +76,21 @@ public class Afonso implements Shootable {
 
     @Override
     public int getX() {
-        return afonso.getX();
+        return elias.getX();
     }
 
     @Override
     public int getY() {
-        return afonso.getY();
+        return elias.getY();
     }
 
     @Override
     public int getWidth() {
-        return afonso.getWidth();
+        return elias.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return afonso.getHeight();
+        return elias.getHeight();
     }
 }

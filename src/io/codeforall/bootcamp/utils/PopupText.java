@@ -37,4 +37,8 @@ public class PopupText {
     public boolean isDone() {
         return dead;
     }
+
+    public void setColorRed() {
+        text.setColor(Color.RED);
+    }
 }

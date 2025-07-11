@@ -1,34 +1,40 @@
-package io.codeforall.bootcamp.shootable.friendly;
+package io.codeforall.bootcamp.shootable.enemy;
 
 import com.codeforall.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
 import io.codeforall.bootcamp.utils.PopupText;
 
-public class Afonso implements Shootable {
+public class Andreia implements Shootable {
 
-    private final Picture afonso;
+    private final Picture andreia;
 
-    private boolean hit = false;
-    private boolean isDone = false;
-    private int hitTimer = 0;
+    private boolean hit;
+    private boolean isDone;
+    private int hitTimer;
 
-    public Afonso() {
+    public Andreia() {
         int[] yPositions = {10, 330, 650};
 
         int randomY = yPositions[(int) (Math.random() * yPositions.length)];
 
-        afonso = new Picture(1000, randomY, "resources/Friendlies/Afonso/afonso-alive.png");
+        hit = false;
+        isDone = false;
+        hitTimer = 0;
+
+        andreia = new Picture(1000,
+                randomY,
+                "resources/Enemies/Andreia/andreia-alive.png");
     }
 
     @Override
     public void init() {
-        afonso.draw();
+        andreia.draw();
     }
 
     @Override
     public void delete() {
-        afonso.delete();
+        andreia.delete();
     }
 
     @Override
@@ -38,16 +44,13 @@ public class Afonso implements Shootable {
             hit = true;
             hitTimer = 180;
 
-            afonso.load("resources/Friendlies/Afonso/afonso-dead.png");
-            afonso.draw();
+            andreia.load("resources/Enemies/Andreia/andreia-dead.png");
+            andreia.draw();
 
-            System.out.println("AFONSO WAS HIT!");
+            System.out.println("ANDREIA WAS HIT!");
 
-            PlayArea.getInstance().addScore(-50);
-
-            PopupText redPopup = new PopupText(getX() + 300, getY() + 180, "-50");
-            redPopup.setColorRed();
-            PlayArea.addPopup(redPopup);
+            PlayArea.getInstance().addScore(100);
+            PlayArea.addPopup(new PopupText(getX() + 300, getY() + 180, "+100"));
         }
     }
 
@@ -76,21 +79,22 @@ public class Afonso implements Shootable {
 
     @Override
     public int getX() {
-        return afonso.getX();
+        return andreia.getX();
     }
 
     @Override
     public int getY() {
-        return afonso.getY();
+        return andreia.getY();
     }
 
     @Override
     public int getWidth() {
-        return afonso.getWidth();
+        return andreia.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return afonso.getHeight();
+        return andreia.getHeight();
     }
 }
+

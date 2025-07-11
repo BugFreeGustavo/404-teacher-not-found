@@ -5,30 +5,30 @@ import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
 import io.codeforall.bootcamp.utils.PopupText;
 
-public class Afonso implements Shootable {
+public class Tiago implements Shootable {
 
-    private final Picture afonso;
+    private final Picture tiago;
 
     private boolean hit = false;
     private boolean isDone = false;
     private int hitTimer = 0;
 
-    public Afonso() {
+    public Tiago() {
         int[] yPositions = {10, 330, 650};
 
         int randomY = yPositions[(int) (Math.random() * yPositions.length)];
 
-        afonso = new Picture(1000, randomY, "resources/Friendlies/Afonso/afonso-alive.png");
+        tiago = new Picture(1000, randomY, "resources/Friendlies/Tiago/tiago-alive.png");
     }
 
     @Override
     public void init() {
-        afonso.draw();
+        tiago.draw();
     }
 
     @Override
     public void delete() {
-        afonso.delete();
+        tiago.delete();
     }
 
     @Override
@@ -38,10 +38,10 @@ public class Afonso implements Shootable {
             hit = true;
             hitTimer = 180;
 
-            afonso.load("resources/Friendlies/Afonso/afonso-dead.png");
-            afonso.draw();
+            tiago.load("resources/Friendlies/Tiago/tiago-dead.png");
+            tiago.draw();
 
-            System.out.println("AFONSO WAS HIT!");
+            System.out.println("TIAGO WAS HIT!");
 
             PlayArea.getInstance().addScore(-50);
 
@@ -76,21 +76,21 @@ public class Afonso implements Shootable {
 
     @Override
     public int getX() {
-        return afonso.getX();
+        return tiago.getX();
     }
 
     @Override
     public int getY() {
-        return afonso.getY();
+        return tiago.getY();
     }
 
     @Override
     public int getWidth() {
-        return afonso.getWidth();
+        return tiago.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return afonso.getHeight();
+        return tiago.getHeight();
     }
 }
