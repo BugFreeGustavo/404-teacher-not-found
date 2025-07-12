@@ -7,9 +7,13 @@ public interface Player {
 
     void moveUp();
     void moveDown();
+    void moveLeft();
+    void moveRight();
 
     boolean canMoveUp();
     boolean canMoveDown();
+    boolean canMoveLeft();
+    boolean canMoveRight();
 
     void shoot();
 

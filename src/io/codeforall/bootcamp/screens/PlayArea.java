@@ -14,6 +14,7 @@ import io.codeforall.bootcamp.shootable.ShootableType;
 import io.codeforall.bootcamp.utils.CollisionChecker;
 import io.codeforall.bootcamp.utils.MyKeyboardHandler;
 import io.codeforall.bootcamp.utils.PopupText;
+import org.w3c.dom.css.Rect;
 
 import java.util.*;
 
@@ -56,9 +57,10 @@ public class PlayArea {
         background.draw();
         System.out.println("LOADING BACKGROUND");
 
+
         scoreText = new Text(PlayArea.WIDTH - 400, 50, "Score: 0");
-        scoreText.setColor(Color.WHITE);
         scoreText.grow(20, 20);
+        scoreText.setColor(Color.WHITE);
         scoreText.draw();
 
         gustavo.init();

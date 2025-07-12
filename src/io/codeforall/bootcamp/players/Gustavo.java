@@ -48,6 +48,22 @@ public class Gustavo implements Player {
     }
 
     @Override
+    public void moveLeft() {
+        if (canMoveLeft()) {
+            System.out.println("GUSTAVO MOVING LEFT");
+            gustavo.translate(-30, 0);
+        }
+    }
+
+    @Override
+    public void moveRight() {
+        if (canMoveRight()) {
+            System.out.println("GUSTAVO MOVING RIGHT");
+            gustavo.translate(30, 0);
+        }
+    }
+
+    @Override
     public boolean canMoveUp() {
         return getY() > 10;
     }
@@ -55,6 +71,16 @@ public class Gustavo implements Player {
     @Override
     public boolean canMoveDown() {
         return getY() < 620;
+    }
+
+    @Override
+    public boolean canMoveLeft() {
+        return getX() > 10;
+    }
+
+    @Override
+    public boolean canMoveRight() {
+        return getX() < 1200;
     }
 
     @Override
