@@ -14,12 +14,9 @@ public class Tiago implements Shootable {
     private boolean isDone = false;
     private int hitTimer = 0;
 
-    public Tiago() {
-        int[] yPositions = {10, 330, 650};
+    public Tiago(int y) {
 
-        int randomY = yPositions[(int) (Math.random() * yPositions.length)];
-
-        tiago = new Picture(1000, randomY, "resources/Friendlies/Tiago/tiago-alive.png");
+        tiago = new Picture(1000, y, "resources/Friendlies/Tiago/tiago-alive.png");
     }
 
     @Override
@@ -54,6 +51,19 @@ public class Tiago implements Shootable {
 
     @Override
     public void update() {
+
+        if (!isHit()) {
+            int playerX = PlayArea.getInstance().getGustavo().getX();
+
+            if (tiago.getX() > playerX) {
+                tiago.translate(-1, 0);
+
+            } else {
+                tiago.delete();
+                isDone = true;
+            }
+
+        }
 
         if (isHit() && hitTimer > 0) {
             hitTimer--;

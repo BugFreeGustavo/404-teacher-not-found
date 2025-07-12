@@ -15,18 +15,13 @@ public class Rolo implements Shootable {
     private boolean isDone;
     private int hitTimer;
 
-    public Rolo() {
-        int[] yPositions = {10, 330, 650};
-
-        int randomY = yPositions[(int) (Math.random() * yPositions.length)];
+    public Rolo(int y) {
 
         hit = false;
         isDone = false;
         hitTimer = 0;
 
-        rolo = new Picture(1000,
-                randomY,
-                "resources/Enemies/Rolo/rolo-alive.png");
+        rolo = new Picture(1000, y, "resources/Enemies/Rolo/rolo-alive.png");
     }
 
     @Override
@@ -58,6 +53,19 @@ public class Rolo implements Shootable {
 
     @Override
     public void update() {
+
+        if (!isHit()) {
+            int playerX = PlayArea.getInstance().getGustavo().getX();
+
+            if (rolo.getX() > playerX) {
+                rolo.translate(-0.5, 0);
+
+            } else {
+                rolo.delete();
+                isDone = true;
+            }
+
+        }
 
         if (isHit() && hitTimer > 0) {
             hitTimer--;

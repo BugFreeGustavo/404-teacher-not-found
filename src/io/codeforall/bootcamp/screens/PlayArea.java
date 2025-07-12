@@ -15,9 +15,7 @@ import io.codeforall.bootcamp.utils.CollisionChecker;
 import io.codeforall.bootcamp.utils.MyKeyboardHandler;
 import io.codeforall.bootcamp.utils.PopupText;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class PlayArea {
 
@@ -66,9 +64,10 @@ public class PlayArea {
         gustavo.init();
         System.out.println("LOADING GUSTAVO");
 
-        addTarget(ShootableFactory.getWeightedRandomShootable());
-        System.out.println("LOADING " + targets.getFirst().getType().toString());
-
+        for (int i = 0; i < 3; i++) {
+            addTarget(ShootableFactory.getWeightedRandomShootable());
+            System.out.println("LOADING " + targets.getFirst().getType().toString());
+        }
 
         new Thread(this::gameLoop).start();
     }
@@ -128,6 +127,7 @@ public class PlayArea {
         while (popupIterator.hasNext()) {
             PopupText p = popupIterator.next();
             p.update();
+
             if (p.isDone()) {
                 popupIterator.remove();
             }
@@ -183,5 +183,9 @@ public class PlayArea {
 
     public static void addPopup(PopupText popup) {
         popups.add(popup);
+    }
+
+    public static List<Shootable> getTargets() {
+        return Collections.unmodifiableList(targets);
     }
 }

@@ -14,12 +14,9 @@ public class Manel implements Shootable {
     private boolean isDone = false;
     private int hitTimer = 0;
 
-    public Manel() {
-        int[] yPositions = {10, 330, 650};
+    public Manel(int y) {
 
-        int randomY = yPositions[(int) (Math.random() * yPositions.length)];
-
-        manel = new Picture(1000, randomY, "resources/Friendlies/Manel/manel-alive.png");
+        manel = new Picture(1000, y, "resources/Friendlies/Manel/manel-alive.png");
     }
 
     @Override
@@ -54,6 +51,19 @@ public class Manel implements Shootable {
 
     @Override
     public void update() {
+
+        if (!isHit()) {
+            int playerX = PlayArea.getInstance().getGustavo().getX();
+
+            if (manel.getX() > playerX) {
+                manel.translate(-1, 0);
+
+            } else {
+                manel.delete();
+                isDone = true;
+            }
+
+        }
 
         if (isHit() && hitTimer > 0) {
             hitTimer--;

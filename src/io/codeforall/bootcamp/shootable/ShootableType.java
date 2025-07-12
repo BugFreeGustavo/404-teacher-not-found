@@ -12,44 +12,44 @@ public enum ShootableType {
 
     ROLO(Category.ENEMY) {
         @Override
-        public Shootable createInstance() {
-            return new Rolo();
+        public Shootable createInstance(int y) {
+            return new Rolo(y);
         }
     },
     CAROLINA(Category.ENEMY) {
         @Override
-        public Shootable createInstance() {
-            return new Carolina();
+        public Shootable createInstance(int y) {
+            return new Carolina(y);
         }
     },
     ANDREIA(Category.ENEMY) {
         @Override
-        public Shootable createInstance() {
-            return new Andreia();
+        public Shootable createInstance(int y) {
+            return new Andreia(y);
         }
     },
     AFONSO(Category.FRIENDLY) {
         @Override
-        public Shootable createInstance() {
-            return new Afonso();
+        public Shootable createInstance(int y) {
+            return new Afonso(y);
         }
     },
     MANEL(Category.FRIENDLY) {
         @Override
-        public Shootable createInstance() {
-            return new Manel();
+        public Shootable createInstance(int y) {
+            return new Manel(y);
         }
     },
     TIAGO(Category.FRIENDLY) {
         @Override
-        public Shootable createInstance() {
-            return new Tiago();
+        public Shootable createInstance(int y) {
+            return new Tiago(y);
         }
     },
     ELIAS(Category.BONUS) {
         @Override
-        public Shootable createInstance() {
-            return new Elias();
+        public Shootable createInstance(int y) {
+            return new Elias(y);
         }
     };
 
@@ -65,6 +65,6 @@ public enum ShootableType {
         return category;
     }
 
-    public abstract Shootable createInstance();
+    public abstract Shootable createInstance(int y);
 
 }

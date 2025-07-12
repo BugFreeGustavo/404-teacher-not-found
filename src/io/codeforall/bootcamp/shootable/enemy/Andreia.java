@@ -14,18 +14,13 @@ public class Andreia implements Shootable {
     private boolean isDone;
     private int hitTimer;
 
-    public Andreia() {
-        int[] yPositions = {10, 330, 650};
-
-        int randomY = yPositions[(int) (Math.random() * yPositions.length)];
+    public Andreia(int y) {
 
         hit = false;
         isDone = false;
         hitTimer = 0;
 
-        andreia = new Picture(1000,
-                randomY,
-                "resources/Enemies/Andreia/andreia-alive.png");
+        andreia = new Picture(1000, y, "resources/Enemies/Andreia/andreia-alive.png");
     }
 
     @Override
@@ -57,6 +52,19 @@ public class Andreia implements Shootable {
 
     @Override
     public void update() {
+
+        if (!isHit()) {
+            int playerX = PlayArea.getInstance().getGustavo().getX();
+
+            if (andreia.getX() > playerX) {
+                andreia.translate(-0.5, 0);
+
+            } else {
+                andreia.delete();
+                isDone = true;
+            }
+
+        }
 
         if (isHit() && hitTimer > 0) {
             hitTimer--;

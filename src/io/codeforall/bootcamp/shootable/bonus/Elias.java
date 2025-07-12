@@ -14,12 +14,44 @@ public class Elias implements Shootable {
     private boolean isDone = false;
     private int hitTimer = 0;
 
-    public Elias() {
-        int[] yPositions = {10, 330, 650};
+    private final int[] yPositions = {10, 330, 650};
+    private int targetY;
+    private final int speedY = 2;
 
-        int randomY = yPositions[(int) (Math.random() * yPositions.length)];
+    private String[] images = {
+            "resources/BonusChar/Elias/elias-down.png",
+            "resources/BonusChar/Elias/elias-up.png"
+    };
 
-        elias = new Picture(1000, randomY, "resources/BonusChar/Elias/elias-down.png");
+    private int animationFrame = 0;
+    private int animationCounter = 0;
+    private final int ANIMATION_SPEED = 16;
+
+    public Elias(int y) {
+
+        elias = new Picture(1000, y, "resources/BonusChar/Elias/elias-down.png");
+        targetY = getNextY(y);
+    }
+
+    private int getNextY(int currentY) {
+        int closestIndex = -1;
+        int minDiff = Integer.MAX_VALUE;
+
+        for (int i = 0; i < yPositions.length; i++) {
+
+            int diff = Math.abs(yPositions[i] - currentY);
+
+            if (diff < minDiff) {
+                minDiff = diff;
+                closestIndex = i;
+            }
+        }
+
+        if (closestIndex == -1) {
+            return yPositions[0];
+        }
+
+        return yPositions[(closestIndex + 1) % yPositions.length];
     }
 
     @Override
@@ -39,8 +71,6 @@ public class Elias implements Shootable {
             hit = true;
             hitTimer = 180;
 
-            elias.load("resources/Friendlies/Afonso/afonso-dead.png");
-            elias.draw();
 
             System.out.println("ELIAS WAS HIT!");
 
@@ -54,6 +84,40 @@ public class Elias implements Shootable {
 
     @Override
     public void update() {
+
+        if (!isHit()) {
+            int playerX = PlayArea.getInstance().getGustavo().getX();
+
+            if (elias.getX() > playerX) {
+                elias.translate(-1, 0);
+
+            } else {
+                elias.delete();
+                isDone = true;
+            }
+
+            int currentY = elias.getY();
+
+            if (Math.abs(elias.getY() - targetY) <= 2) {
+                elias.translate(0, targetY - elias.getY());
+                targetY = getNextY(targetY);
+
+            } else if (currentY < targetY) {
+                elias.translate(0, Math.min(speedY, targetY - currentY));
+
+            } else {
+                elias.translate(0, -Math.min(speedY, currentY - targetY));
+            }
+
+            animationCounter++;
+
+            if (animationCounter >= ANIMATION_SPEED) {
+                animationCounter = 0;
+
+                animationFrame = (animationFrame + 1) % images.length;
+                elias.load(images[animationFrame]);
+            }
+        }
 
         if (isHit() && hitTimer > 0) {
             hitTimer--;

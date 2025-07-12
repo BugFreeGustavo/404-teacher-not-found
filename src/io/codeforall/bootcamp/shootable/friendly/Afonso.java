@@ -14,12 +14,8 @@ public class Afonso implements Shootable {
     private boolean isDone = false;
     private int hitTimer = 0;
 
-    public Afonso() {
-        int[] yPositions = {10, 330, 650};
-
-        int randomY = yPositions[(int) (Math.random() * yPositions.length)];
-
-        afonso = new Picture(1000, randomY, "resources/Friendlies/Afonso/afonso-alive.png");
+    public Afonso(int y) {
+        afonso = new Picture(1000, y, "resources/Friendlies/Afonso/afonso-alive.png");
     }
 
     @Override
@@ -54,6 +50,19 @@ public class Afonso implements Shootable {
 
     @Override
     public void update() {
+
+        if (!isHit()) {
+            int playerX = PlayArea.getInstance().getGustavo().getX();
+
+            if (afonso.getX() > playerX) {
+                afonso.translate(-1, 0);
+
+            } else {
+                afonso.delete();
+                isDone = true;
+            }
+
+        }
 
         if (isHit() && hitTimer > 0) {
             hitTimer--;

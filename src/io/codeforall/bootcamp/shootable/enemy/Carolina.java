@@ -14,18 +14,13 @@ public class Carolina implements Shootable {
     private boolean isDone;
     private int hitTimer;
 
-    public Carolina() {
-        int[] yPositions = {10, 330, 650};
-
-        int randomY = yPositions[(int) (Math.random() * yPositions.length)];
+    public Carolina(int y) {
 
         hit = false;
         isDone = false;
         hitTimer = 0;
 
-        carolina = new Picture(1000,
-                randomY,
-                "resources/Enemies/Carolina/carolina-alive.png");
+        carolina = new Picture(1000, y, "resources/Enemies/Carolina/carolina-alive.png");
     }
 
     @Override
@@ -57,6 +52,18 @@ public class Carolina implements Shootable {
 
     @Override
     public void update() {
+
+        if(!isHit()) {
+            int playerX = PlayArea.getInstance().getGustavo().getX();
+
+            if(carolina.getX() > playerX) {
+                carolina.translate(-0.5, 0);
+
+            } else {
+                carolina.delete();
+                isDone = true;
+            }
+        }
 
         if (isHit() && hitTimer > 0) {
             hitTimer--;
