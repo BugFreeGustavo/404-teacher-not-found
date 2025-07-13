@@ -54,7 +54,7 @@ public class Carolina implements Shootable {
     public void update() {
 
         if(!isHit()) {
-            int playerX = PlayArea.getInstance().getGustavo().getX();
+            int playerX = PlayArea.getInstance().getPlayer().getX();
 
             if(carolina.getX() > playerX) {
                 carolina.translate(-0.5, 0);

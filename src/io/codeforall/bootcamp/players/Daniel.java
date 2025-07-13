@@ -6,62 +6,62 @@ import io.codeforall.bootcamp.bullets.BulletType;
 import io.codeforall.bootcamp.factories.BulletFactory;
 import io.codeforall.bootcamp.screens.PlayArea;
 
-public class Gustavo implements Player {
+public class Daniel implements Player {
 
-    private Picture gustavo;
+    private Picture daniel;
     private int posX;
     private int posY;
 
     private int shootingTimer = 0;
     private boolean isShooting = false;
 
-    public Gustavo(int posX, int posY) {
+    public Daniel(int posX, int posY) {
         this.posX = posX;
         this.posY = posY;
 
-        gustavo = new Picture(posX, posY, "resources/Player/Gustavo/gustavo-still.png");
+        daniel = new Picture(posX, posY, "resources/Player/Daniel/daniel-still.png");
     }
 
     @Override
     public void init() {
-        gustavo.draw();
+        daniel.draw();
     }
 
     @Override
     public void delete() {
-        System.out.println("DELETED GUSTAVO");
-        gustavo.delete();
+        System.out.println("DELETED DANIEL");
+        daniel.delete();
     }
 
     @Override
     public void moveUp() {
         if (canMoveUp()) {
-            System.out.println("GUSTAVO MOVING UP");
-            gustavo.translate(0, -320);
+            System.out.println("DANIEL MOVING UP");
+            daniel.translate(0, -320);
         }
     }
 
     @Override
     public void moveDown() {
         if (canMoveDown()) {
-            System.out.println("GUSTAVO MOVING DOWN");
-            gustavo.translate(0, 320);
+            System.out.println("DANIEL MOVING DOWN");
+            daniel.translate(0, 320);
         }
     }
 
     @Override
     public void moveLeft() {
         if (canMoveLeft()) {
-            System.out.println("GUSTAVO MOVING LEFT");
-            gustavo.translate(-30, 0);
+            System.out.println("DANIEL MOVING LEFT");
+            daniel.translate(-30, 0);
         }
     }
 
     @Override
     public void moveRight() {
         if (canMoveRight()) {
-            System.out.println("GUSTAVO MOVING RIGHT");
-            gustavo.translate(30, 0);
+            System.out.println("DANIEL MOVING RIGHT");
+            daniel.translate(30, 0);
         }
     }
 
@@ -87,7 +87,7 @@ public class Gustavo implements Player {
 
     @Override
     public void shoot() {
-        Bullet bullet = BulletFactory.getNewBullet(BulletType.GUSTAVO_BULLET, 10, 10);
+        Bullet bullet = BulletFactory.getNewBullet(BulletType.DANIEL_BULLET, 10, 10);
 
         bullet.setStartingX(getX() + 200);
         bullet.setStartingY(getY() + 100);
@@ -98,7 +98,7 @@ public class Gustavo implements Player {
         shootingFace();
         shootingTimer = 10;
         isShooting = true;
-        System.out.println("GUSTAVO SHOOTS");
+        System.out.println("DANIEL SHOOTS");
     }
 
     @Override
@@ -115,21 +115,21 @@ public class Gustavo implements Player {
 
     @Override
     public void shootingFace() {
-        gustavo.load("resources/Player/Gustavo/gustavo-shooting.png");
+        daniel.load("resources/Player/Daniel/daniel-shooting.png");
     }
 
     @Override
     public void normalFace() {
-        gustavo.load("resources/Player/Gustavo/gustavo-still.png");
+        daniel.load("resources/Player/Daniel/daniel-still.png");
     }
 
     @Override
     public int getX() {
-        return gustavo.getX();
+        return daniel.getX();
     }
 
     @Override
     public int getY() {
-        return gustavo.getY();
+        return daniel.getY();
     }
 }

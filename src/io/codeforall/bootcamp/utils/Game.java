@@ -1,43 +1,53 @@
 package io.codeforall.bootcamp.utils;
 
+import io.codeforall.bootcamp.players.Player;
+import io.codeforall.bootcamp.screens.ChoosePlayer;
 import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.screens.StartingScreen;
 
 public class Game {
 
     private StartingScreen myStartingScreen;
+    private ChoosePlayer myChoosePlayer;
     private PlayArea myPlayArea;
     private MyKeyboardHandler myKeyboardHandler;
 
     private boolean runningStartScreen = true;
+    private boolean runningChooseScreen = true;
 
     public Game() {
         System.out.println("STARTING 404 - TEACHER NOT FOUND");
 
         myKeyboardHandler = new MyKeyboardHandler();
+
         myStartingScreen = new StartingScreen(myKeyboardHandler);
-        myPlayArea = new PlayArea(myKeyboardHandler);
+        myChoosePlayer = new ChoosePlayer(myKeyboardHandler);
 
         myKeyboardHandler.setMyStartingScreen(myStartingScreen);
-        myKeyboardHandler.setMyPlayArea(myPlayArea);
-        myKeyboardHandler.setMyPlayer(myPlayArea.getGustavo());
+        myKeyboardHandler.setMyChoosePlayer(myChoosePlayer);
 
         myKeyboardHandler.init();
-
-        myStartingScreen.load();
     }
 
     public void start() {
-        run();
+        myStartingScreen.load();
+        runStartScreen();
+
+        myChoosePlayer.load();
+        runChooseScreen();
+
+        Player selected = myChoosePlayer.getChosenPlayer();
+
+        myPlayArea = new PlayArea(myKeyboardHandler, selected);
+        myKeyboardHandler.setMyPlayArea(myPlayArea);
+        myKeyboardHandler.setMyPlayer(myPlayArea.getPlayer());
+
+        myPlayArea.load();
     }
 
-    private void run() {
-        while (runningStartScreen) {
+    private void runStartScreen() {
+        while (!myKeyboardHandler.spaceWasPressed()) {
             myStartingScreen.update();
-
-            if(myKeyboardHandler.spaceWasPressed()) {
-                runningStartScreen = false;
-            }
 
             try {
                 Thread.sleep(16);
@@ -46,7 +56,18 @@ public class Game {
                 e.printStackTrace();
             }
         }
+    }
 
-        myPlayArea.load();
+    private void runChooseScreen() {
+        while (myChoosePlayer.getChosenPlayer() == null) {
+            try {
+                Thread.sleep(16);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        myChoosePlayer.delete();
     }
 }

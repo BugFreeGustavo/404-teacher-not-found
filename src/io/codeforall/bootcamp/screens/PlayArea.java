@@ -5,16 +5,12 @@ import com.codeforall.simplegraphics.graphics.Rectangle;
 import com.codeforall.simplegraphics.graphics.Text;
 import com.codeforall.simplegraphics.pictures.Picture;
 import io.codeforall.bootcamp.bullets.Bullet;
-import io.codeforall.bootcamp.effects.ScreenShaker;
 import io.codeforall.bootcamp.factories.ShootableFactory;
-import io.codeforall.bootcamp.players.Gustavo;
 import io.codeforall.bootcamp.players.Player;
 import io.codeforall.bootcamp.shootable.Shootable;
-import io.codeforall.bootcamp.shootable.ShootableType;
 import io.codeforall.bootcamp.utils.CollisionChecker;
 import io.codeforall.bootcamp.utils.MyKeyboardHandler;
 import io.codeforall.bootcamp.utils.PopupText;
-import org.w3c.dom.css.Rect;
 
 import java.util.*;
 
@@ -25,7 +21,7 @@ public class PlayArea {
     private Rectangle myScreenSize;
     private Picture background;
     private MyKeyboardHandler myKeyboardHandler;
-    private Player gustavo;
+    private Player player;
 
     private static List<Bullet> bullets = new ArrayList<>();
     private static List<Shootable> targets = new ArrayList<>();
@@ -40,7 +36,7 @@ public class PlayArea {
     private int score = 0;
     private Text scoreText;
 
-    public PlayArea(MyKeyboardHandler keyboardHandler) {
+    public PlayArea(MyKeyboardHandler keyboardHandler, Player player) {
         instance = this;
 
         this.myKeyboardHandler = keyboardHandler;
@@ -48,7 +44,7 @@ public class PlayArea {
         myScreenSize = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
         background = new Picture(PADDING, PADDING, "resources/Background/play-area.jpg");
 
-        gustavo = new Gustavo(20, 650);
+        this.player = player;
     }
 
     public void load() {
@@ -63,7 +59,7 @@ public class PlayArea {
         scoreText.setColor(Color.WHITE);
         scoreText.draw();
 
-        gustavo.init();
+        player.init();
         System.out.println("LOADING GUSTAVO");
 
         for (int i = 0; i < 3; i++) {
@@ -88,7 +84,7 @@ public class PlayArea {
     }
 
     private void update() {
-        gustavo.update();
+        player.update();
 
         Iterator<Bullet> iterator = bullets.iterator();
 
@@ -147,8 +143,8 @@ public class PlayArea {
         background.delete();
     }
 
-    public Player getGustavo() {
-        return gustavo;
+    public Player getPlayer() {
+        return player;
     }
 
     public static int getHEIGHT() {

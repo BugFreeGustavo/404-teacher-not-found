@@ -54,7 +54,7 @@ public class Andreia implements Shootable {
     public void update() {
 
         if (!isHit()) {
-            int playerX = PlayArea.getInstance().getGustavo().getX();
+            int playerX = PlayArea.getInstance().getPlayer().getX();
 
             if (andreia.getX() > playerX) {
                 andreia.translate(-0.5, 0);

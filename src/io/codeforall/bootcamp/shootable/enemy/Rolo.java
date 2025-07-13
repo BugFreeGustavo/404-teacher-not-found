@@ -1,7 +1,6 @@
 package io.codeforall.bootcamp.shootable.enemy;
 
 import com.codeforall.simplegraphics.pictures.Picture;
-import io.codeforall.bootcamp.effects.ScreenShaker;
 import io.codeforall.bootcamp.screens.PlayArea;
 import io.codeforall.bootcamp.shootable.Shootable;
 import io.codeforall.bootcamp.shootable.ShootableType;
@@ -55,7 +54,7 @@ public class Rolo implements Shootable {
     public void update() {
 
         if (!isHit()) {
-            int playerX = PlayArea.getInstance().getGustavo().getX();
+            int playerX = PlayArea.getInstance().getPlayer().getX();
 
             if (rolo.getX() > playerX) {
                 rolo.translate(-0.5, 0);

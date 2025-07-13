@@ -86,7 +86,7 @@ public class Elias implements Shootable {
     public void update() {
 
         if (!isHit()) {
-            int playerX = PlayArea.getInstance().getGustavo().getX();
+            int playerX = PlayArea.getInstance().getPlayer().getX();
 
             if (elias.getX() > playerX) {
                 elias.translate(-1, 0);

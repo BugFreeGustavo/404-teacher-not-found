@@ -1,16 +1,14 @@
 package io.codeforall.bootcamp.factories;
 
-import io.codeforall.bootcamp.players.Gustavo;
-import io.codeforall.bootcamp.players.Player;
-import io.codeforall.bootcamp.players.PlayerType;
+import io.codeforall.bootcamp.players.*;
 
 public class PlayerFactory {
 
-    public static Player getPlayer(PlayerType players) {
+    public static Player getPlayer(PlayerType players, int x, int y) {
         return switch (players) {
-            case DANIEL -> null;
-            case MARIA -> null;
-            case GUSTAVO -> new Gustavo(20, 650);
+            case DANIEL -> new Daniel(x, y);
+            case MARIA -> new Maria(x, y);
+            case GUSTAVO -> new Gustavo(x, y);
         };
     }
 }

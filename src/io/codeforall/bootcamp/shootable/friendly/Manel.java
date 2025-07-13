@@ -53,7 +53,7 @@ public class Manel implements Shootable {
     public void update() {
 
         if (!isHit()) {
-            int playerX = PlayArea.getInstance().getGustavo().getX();
+            int playerX = PlayArea.getInstance().getPlayer().getX();
 
             if (manel.getX() > playerX) {
                 manel.translate(-1, 0);
