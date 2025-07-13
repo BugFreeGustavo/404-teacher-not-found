@@ -8,6 +8,7 @@ import io.codeforall.bootcamp.bullets.Bullet;
 import io.codeforall.bootcamp.factories.ShootableFactory;
 import io.codeforall.bootcamp.players.Player;
 import io.codeforall.bootcamp.shootable.Shootable;
+import io.codeforall.bootcamp.shootable.ShootableType;
 import io.codeforall.bootcamp.utils.CollisionChecker;
 import io.codeforall.bootcamp.utils.MyKeyboardHandler;
 import io.codeforall.bootcamp.utils.PopupText;
@@ -35,12 +36,12 @@ public class PlayArea {
 
     private int score = 0;
     private Text scoreText;
-    private Text pauseScoreText;
     private Text pauseOverlay;
 
     private Rectangle dimPauseOverlay;
 
     private boolean paused = false;
+    private boolean gameOver = false;
 
     public PlayArea(MyKeyboardHandler keyboardHandler, Player player) {
         instance = this;
@@ -90,7 +91,7 @@ public class PlayArea {
     }
 
     private void update() {
-        if (paused) {
+        if (paused || gameOver) {
             return;
         }
 
@@ -105,6 +106,12 @@ public class PlayArea {
             for (Shootable target : targets) {
                 if (!b.isCollided() && CollisionChecker.isColliding(b, target)) {
                     b.setCollided();
+
+                    if (target.getType() == ShootableType.ELIAS) {
+                        triggerGameOver();
+                        return;
+                    }
+
                     target.onHit();
 
 //                    if(target.getType().getCategory() == ShootableType.Category.ENEMY) {
@@ -187,10 +194,13 @@ public class PlayArea {
         if (dimPauseOverlay != null) {
             dimPauseOverlay.delete();
         }
+    }
 
-        if (pauseScoreText != null) {
-            pauseScoreText.delete();
-        }
+    public void triggerGameOver() {
+        gameOver = true;
+        delete();
+        GameOver gameOver = new GameOver();
+        gameOver.load();
     }
 
     public void delete() {
