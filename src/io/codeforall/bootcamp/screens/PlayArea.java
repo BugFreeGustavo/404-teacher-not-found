@@ -35,6 +35,12 @@ public class PlayArea {
 
     private int score = 0;
     private Text scoreText;
+    private Text pauseScoreText;
+    private Text pauseOverlay;
+
+    private Rectangle dimPauseOverlay;
+
+    private boolean paused = false;
 
     public PlayArea(MyKeyboardHandler keyboardHandler, Player player) {
         instance = this;
@@ -84,6 +90,10 @@ public class PlayArea {
     }
 
     private void update() {
+        if (paused) {
+            return;
+        }
+
         player.update();
 
         Iterator<Bullet> iterator = bullets.iterator();
@@ -136,6 +146,50 @@ public class PlayArea {
             spawnNextTarget = false;
 
             addTarget(ShootableFactory.getWeightedRandomShootable());
+        }
+    }
+
+    public void togglePause() {
+        paused = !paused;
+
+        if (paused) {
+            showPauseOverlay();
+
+        } else {
+            hidePauseOverlay();
+        }
+    }
+
+    private void showPauseOverlay() {
+        int boxWidth = 400;
+        int boxHeight = 150;
+
+        int boxX = (background.getWidth() / 2) - (boxWidth / 2);
+        int boxY = (background.getHeight() / 2) - (boxHeight / 2);
+
+        dimPauseOverlay = new Rectangle(boxX, boxY, boxWidth, boxHeight);
+        dimPauseOverlay.setColor(new Color(37, 150, 190));
+        dimPauseOverlay.fill();
+        dimPauseOverlay.draw();
+
+        pauseOverlay = new Text((double) background.getMaxX() / 2 - 50,
+                (double) background.getMaxY() / 2 - 10, "GAME PAUSED");
+        pauseOverlay.grow(50, 20);
+        pauseOverlay.setColor(Color.YELLOW);
+        pauseOverlay.draw();
+    }
+
+    private void hidePauseOverlay() {
+        if (pauseOverlay != null) {
+            pauseOverlay.delete();
+        }
+
+        if (dimPauseOverlay != null) {
+            dimPauseOverlay.delete();
+        }
+
+        if (pauseScoreText != null) {
+            pauseScoreText.delete();
         }
     }
 

@@ -25,6 +25,11 @@ public class ChoosePlayer {
     private Player chosenPlayer;
     private boolean playerChosen = false;
 
+    private boolean isVisible = true;
+    private int blinkCounter = 0;
+    private final int blinkingInterval = 16;
+    private boolean blinking = true;
+
     public ChoosePlayer(MyKeyboardHandler keyboardHandler) {
         cp = new Picture(10, 10, "resources/Background/choose-player-screen.png");
 
@@ -73,6 +78,32 @@ public class ChoosePlayer {
         drawTitles();
         drawFaces();
         drawButtons();
+    }
+
+    public void update() {
+        if(!blinking) {
+            return;
+        }
+
+        blinkCounter++;
+
+        if(blinkCounter >= blinkingInterval) {
+            blinkCounter = 0;
+
+            if(isVisible) {
+                drawFaces();
+
+            } else {
+                deleteFaces();
+            }
+
+            isVisible = !isVisible;
+        }
+    }
+
+    public void stopBlinking() {
+        blinking = false;
+        drawFaces();
     }
 
     public void delete() {

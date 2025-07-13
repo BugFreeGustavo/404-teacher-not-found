@@ -60,6 +60,8 @@ public class Game {
 
     private void runChooseScreen() {
         while (myChoosePlayer.getChosenPlayer() == null) {
+            myChoosePlayer.update();
+
             try {
                 Thread.sleep(16);
 
@@ -68,6 +70,7 @@ public class Game {
             }
         }
 
+        myChoosePlayer.stopBlinking();
         myChoosePlayer.delete();
     }
 }

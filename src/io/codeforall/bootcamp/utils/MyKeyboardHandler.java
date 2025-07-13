@@ -28,6 +28,7 @@ public class MyKeyboardHandler implements KeyboardHandler {
 
     private boolean pressedSpace = false;
     private boolean playerChosen = false;
+    private boolean paused = false;
 
     public void init() {
         myKeyboard = new Keyboard(this);
@@ -44,6 +45,8 @@ public class MyKeyboardHandler implements KeyboardHandler {
         KeyboardEvent rightKey = new KeyboardEvent();
 
         KeyboardEvent sKey = new KeyboardEvent();
+
+        KeyboardEvent pKey = new KeyboardEvent();
 
         spaceKey.setKey(KeyboardEvent.KEY_SPACE);
         spaceKey.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -66,6 +69,9 @@ public class MyKeyboardHandler implements KeyboardHandler {
         sKey.setKey(KeyboardEvent.KEY_S);
         sKey.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
+        pKey.setKey(KeyboardEvent.KEY_P);
+        pKey.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
         myKeyboard.addEventListener(spaceKey);
 
         myKeyboard.addEventListener(oneKey);
@@ -77,6 +83,8 @@ public class MyKeyboardHandler implements KeyboardHandler {
         myKeyboard.addEventListener(leftKey);
         myKeyboard.addEventListener(rightKey);
         myKeyboard.addEventListener(sKey);
+
+        myKeyboard.addEventListener(pKey);
     }
 
     @Override
@@ -96,10 +104,18 @@ public class MyKeyboardHandler implements KeyboardHandler {
                 }
                 break;
 
+            case KeyboardEvent.KEY_P:
+                if(gameState == GameState.PLAY_AREA) {
+                    myPlayArea.togglePause();
+                    paused = !paused;
+                }
+                break;
 
             case KeyboardEvent.KEY_1:
                 if (gameState == GameState.CHOOSE_PLAYER && !playerChosen) {
+                    System.out.println("PRESSED 1");
                     myChoosePlayer.selectPlayer(1);
+
 
                     gameState = GameState.PLAY_AREA;
                     playerChosen = true;
@@ -108,6 +124,7 @@ public class MyKeyboardHandler implements KeyboardHandler {
 
             case KeyboardEvent.KEY_2:
                 if (gameState == GameState.CHOOSE_PLAYER && !playerChosen) {
+                    System.out.println("PRESSED 2");
                     myChoosePlayer.selectPlayer(2);
 
                     gameState = GameState.PLAY_AREA;
@@ -117,6 +134,7 @@ public class MyKeyboardHandler implements KeyboardHandler {
 
             case KeyboardEvent.KEY_3:
                 if (gameState == GameState.CHOOSE_PLAYER && !playerChosen) {
+                    System.out.println("PRESSED 3");
                     myChoosePlayer.selectPlayer(3);
 
                     gameState = GameState.PLAY_AREA;
@@ -125,31 +143,31 @@ public class MyKeyboardHandler implements KeyboardHandler {
                 break;
 
             case KeyboardEvent.KEY_S:
-                if (gameState == GameState.PLAY_AREA) {
+                if (gameState == GameState.PLAY_AREA && !paused) {
                     myPlayer.shoot();
                 }
                 break;
 
             case KeyboardEvent.KEY_UP:
-                if (gameState == GameState.PLAY_AREA) {
+                if (gameState == GameState.PLAY_AREA && !paused) {
                     myPlayer.moveUp();
                 }
                 break;
 
             case KeyboardEvent.KEY_DOWN:
-                if (gameState == GameState.PLAY_AREA) {
+                if (gameState == GameState.PLAY_AREA && !paused) {
                     myPlayer.moveDown();
                 }
                 break;
 
             case KeyboardEvent.KEY_LEFT:
-                if (gameState == GameState.PLAY_AREA) {
+                if (gameState == GameState.PLAY_AREA && !paused) {
                     myPlayer.moveLeft();
                 }
                 break;
 
             case KeyboardEvent.KEY_RIGHT:
-                if (gameState == GameState.PLAY_AREA) {
+                if (gameState == GameState.PLAY_AREA && !paused) {
                     myPlayer.moveRight();
                 }
                 break;
