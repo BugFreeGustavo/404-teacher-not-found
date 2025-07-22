@@ -1,17 +1,18 @@
 package io.codeforall.bootcamp.screens;
 
 import com.codeforall.simplegraphics.graphics.Rectangle;
+import com.codeforall.simplegraphics.pictures.Picture;
 
 public class GameOver {
 
-    private Rectangle gameOver;
+    private Picture gameOver;
 
     public GameOver() {
-       gameOver = new Rectangle(PlayArea.getPADDING(), PlayArea.getPADDING(), PlayArea.getWIDTH(), PlayArea.getHEIGHT());
+        gameOver = new Picture(10, 10, "resources/Background/game-over-screen.jpg");
     }
 
     public void load() {
-        gameOver.fill();
+        gameOver.draw();
     }
 
     public void delete() {

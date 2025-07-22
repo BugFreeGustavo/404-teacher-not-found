@@ -21,10 +21,10 @@ public class PopupText {
     }
 
     public void update() {
-        if(framesToLive-- > 0) {
+        if (framesToLive-- > 0) {
             text.translate(0, dy);
 
-            if(growthFrames-- > 0) {
+            if (growthFrames-- > 0) {
                 text.grow(growthAmountPerFrame, growthAmountPerFrame);
             }
 

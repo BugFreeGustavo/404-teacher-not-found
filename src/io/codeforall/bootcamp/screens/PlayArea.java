@@ -19,14 +19,13 @@ public class PlayArea {
 
     private static PlayArea instance;
 
-    private Rectangle myScreenSize;
-    private Picture background;
-    private MyKeyboardHandler myKeyboardHandler;
-    private Player player;
+    private final Rectangle myScreenSize;
+    private final Picture background;
+    private final Player player;
 
-    private static List<Bullet> bullets = new ArrayList<>();
-    private static List<Shootable> targets = new ArrayList<>();
-    private static List<PopupText> popups = new ArrayList<>();
+    private static final List<Bullet> bullets = new ArrayList<>();
+    private static final List<Shootable> targets = new ArrayList<>();
+    private static final List<PopupText> popups = new ArrayList<>();
 
     private boolean spawnNextTarget = false;
 
@@ -45,8 +44,6 @@ public class PlayArea {
 
     public PlayArea(MyKeyboardHandler keyboardHandler, Player player) {
         instance = this;
-
-        this.myKeyboardHandler = keyboardHandler;
 
         myScreenSize = new Rectangle(PADDING, PADDING, WIDTH, HEIGHT);
         background = new Picture(PADDING, PADDING, "resources/Background/play-area.jpg");
